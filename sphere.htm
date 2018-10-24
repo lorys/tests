@@ -1,0 +1,92 @@
+<html>
+	<head>
+		<title>Sphere</title>
+		<style>
+		body {
+			background-image: url("http://www.astrosurf.com/luxorion/Sciences/voie-lactee-noyau-hd-eso.jpg");
+			background-position: auto 0%;
+			background-size: cover;
+		}
+			.circle {
+				display: inline-block;
+				background: black;
+				border-radius: 50%;
+				margin: 0;
+				margin: auto;
+				position: absolute;
+			}
+
+			.circle.earth {
+				background-image: url("earth.png");
+				background-position: 0% 0%;
+				background-size: auto 100%;
+				height: 100px;
+				width: 100px;
+				z-index: 9;
+				top: 100px;
+//				transform: rotate(23deg);
+			}
+
+			.circle.sun {
+				background-color: rgb(255, 237, 30);
+				height: 200px;
+				width: 200px;
+				z-index: 8;
+				top: 5%;
+			}
+		</style>
+		<script>
+				x = 0;
+				y = 0;
+				aller_retour = 0;
+				z = window.innerWidth/2;
+				shadow = 0;
+			function rotate() {
+				x--;
+				document.getElementById('earth').style.backgroundPosition=x+"px";
+			}
+
+			function orbite() {
+				if (z != 100 && aller_retour == 0)
+				{
+					z--;
+				}
+				if (z == 100)
+				{
+					aller_retour = 1;
+					document.getElementById('earth').style.zIndex="7";
+				}
+				if (z < window.innerWidth-100 && aller_retour == 1)
+					z++;
+				if (z == window.innerWidth-200 && aller_retour == 1)
+				{
+					aller_retour = 0;
+					document.getElementById('earth').style.zIndex="9";
+				}
+				if (aller_retour == 0)
+				{
+					shadow++;
+				}
+				else if (aller_retour == 1)
+				{
+					shadow--;
+				}
+				if (aller_retour == 0 && z < (window.innerWidth/3)*2)
+				{
+					shadow = 600;
+				}
+				if (aller_retour == 0 && z < (window.innerWidth/3.5))
+				{
+					shadow = 250;
+				}
+				document.getElementById('earth').style.left=z+"px";
+				document.getElementById('earth').style.boxShadow="inset "+shadow/2.5+"px 0px 50px";
+			}
+		</script>
+	</head>
+	<body onLoad="setInterval('rotate()', 1); setInterval('orbite()', 100); document.getElementById('sun').style.left=window.innerWidth/2-100;">
+		<div class="circle sun" id="sun"></div>
+		<div class="circle earth" id="earth"></div>
+
+	</body>
+</html>

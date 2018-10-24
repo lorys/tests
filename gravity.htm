@@ -1,0 +1,46 @@
+<html>
+<head>
+	<script>
+		id = 0;
+		max = 50;
+		intervals = new Array;
+		function gravity(id)
+		{
+			if (document.getElementById(id-max)){
+				document.getElementById(id-max).remove();
+				clearInterval(intervals[id-max]);
+			}
+			centre_x = window.innerWidth/2;
+			centre_y = window.innerHeight/2;
+			dot_x = document.getElementById(id).offsetLeft;
+			dot_y = document.getElementById(id).offsetTop;
+			diff_x = ((dot_x-centre_x) < 0)?(centre_x-dot_x):(dot_x-centre_x);
+			diff_y = ((dot_y-centre_y) < 0)?(centre_y-dot_y):(dot_y-centre_y);
+			document.getElementById(id).style.left=(((dot_x-centre_x) < 0)?dot_x+(diff_x/diff_y):dot_x-(diff_x/diff_y))+"px";
+			document.getElementById(id).style.top=(((dot_y-centre_y) < 0)?dot_y+(diff_y/diff_x):dot_y-(diff_y/diff_x))+"px";
+		}
+
+		function add(x, y)
+		{
+			document.body.innerHTML+="<div class='dot' style='left: "+x+"; top: "+y+";' id='"+id+"'></div>";
+			intervals.push(setInterval("gravity('"+id+"');", 1));
+			id++;
+		}
+	</script>
+	<style>
+	body {
+		background-color: black;
+	}
+		.dot {
+			background-color: white;
+			width: 5px;
+			height: 5px;
+			position: absolute;
+			border-radius: 50%;
+		}
+	</style>
+</head>
+<body onClick=" setInterval('add(Math.round(Math.random() * window.innerWidth), Math.round(Math.random() * (window.innerHeight/2)+window.innerHeight/2))', 1) /* add(event.clientX, event.clientY) */">
+
+</body>
+</html>
