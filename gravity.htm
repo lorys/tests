@@ -2,16 +2,34 @@
 <head>
 	<script>
 		id = 0;
-		max = 50;
+		max = 500;
 		intervals = new Array;
+
+		function moyenne_x() {
+			total = 0;
+			for (a = id-max; document.getElementById(a); a++) {
+				total += document.getElementById(a).offsetLeft;
+			}
+			return (total/(a-1));
+		}
+
+		function moyenne_y() {
+			total = 0;
+			for (a = id-max; document.getElementById(a); a++) {
+				total += document.getElementById(a).offsetTop;
+			}
+			console.log(total);
+			return (total/(a-1));
+		}
+
 		function gravity(id)
 		{
 			if (document.getElementById(id-max)){
 				document.getElementById(id-max).remove();
 				clearInterval(intervals[id-max]);
 			}
-			centre_x = window.innerWidth/2;
-			centre_y = window.innerHeight/2;
+			centre_x = moyenne_x();
+			centre_y = moyenne_y();
 			dot_x = document.getElementById(id).offsetLeft;
 			dot_y = document.getElementById(id).offsetTop;
 			diff_x = ((dot_x-centre_x) < 0)?(centre_x-dot_x):(dot_x-centre_x);
@@ -40,7 +58,7 @@
 		}
 	</style>
 </head>
-<body onClick=" setInterval('add(Math.round(Math.random() * window.innerWidth), Math.round(Math.random() * (window.innerHeight/2)+window.innerHeight/2))', 1) /* add(event.clientX, event.clientY) */">
+<body onClick=" setInterval('add(Math.round(Math.random() * window.innerWidth), Math.round(Math.random() * (window.innerHeight/2)+window.innerHeight/2))', 1); add(event.clientX, event.clientY)">
 
 </body>
 </html>
