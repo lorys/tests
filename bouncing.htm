@@ -1,0 +1,41 @@
+<html>
+	<head>
+			<title>bouncing pixel</title>
+	</head>
+	<body onLoad="setInterval('move()', 1);">
+		<canvas id="canvas" width="600" height="300"></canvas>
+		<div style="display: none;">
+			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=" id="blackpixel"/>
+		</div>
+		<script>
+			function getCanvas(id)
+			{
+				var c = document.getElementById(id);
+				var ctx = c.getContext("2d");
+				return (ctx);
+			}
+			canvas = getCanvas("canvas");
+			width = 600;
+			height = 300;
+			x = 2;
+			y = 2;
+			last_x = 2.1;
+			last_y = 2.5;
+			pixel = document.getElementById("blackpixel");
+			function move()
+			{
+				tmp_x = x - last_x;
+				tmp_y = y - last_y;
+				last_x = x;
+				last_y = y;
+				if (tmp_y + y >= height || tmp_y + y <= 0)
+					tmp_y *= -1;
+				if (tmp_x + x <= 0 || tmp_x + x >= width)
+					tmp_x *= -1;
+				x += tmp_x;
+				y += tmp_y;
+				canvas.drawImage(pixel, x, y);
+			}
+		</script>
+	</body>
+</html>

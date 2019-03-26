@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<title>PI</title>
+	</head>
+	<body>
+		<h1 id="pi">4</h1>
+		<script>
+
+			precision = 1000;
+			a = 3*precision;
+			function ref()
+			{
+				pi = document.getElementById('pi');
+				pi.innerHTML=pi.innerHTML - ((4/a)*precision) + (((4)/(a+2))*precision);
+				console.log("a = "+a);
+				a += 4*precision;
+			}
+			setInterval("ref();", 1);
+		</script>
+	</body>
+</html>
