@@ -3,7 +3,7 @@
 			<title>bouncing pixel</title>
 	</head>
 	<body onLoad="setInterval('move_every()', 1);">
-		<canvas id="canvas" width="600" height="300"></canvas>
+		<canvas id="canvas" width="1024" height="700"></canvas>
 		<div style="display: none;">
 			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=" id="blackpixel"/>
 		</div>
@@ -15,26 +15,26 @@
 				return (ctx);
 			}
 			canvas = getCanvas("canvas");
-			width = 600;
-			height = 300;
+			width = 1024;
+			height = 700;
+			nb_of_px = 500;
 			x = new Array();
 			y = new Array();
 			last_x = new Array();
 			last_y = new Array();
-			for (a = 0; a < 15; a++)
+			for (a = 0; a < nb_of_px; a++)
 			{
-				x[a] = 300;
-				y[a] = 150;
-				last_y[a] = y[a]+(Math.round(Math.random() * 5)-2.5);
-				last_x[a] = x[a]+(Math.round(Math.random() * 5)-2.5);
+				x[a] = width/2;
+				y[a] = height/2;
+				last_y[a] = y[a]+((Math.random() * 5)-2.5);
+				last_x[a] = x[a]+((Math.random() * 5)-2.5);
 			}
 			pixel = document.getElementById("blackpixel");
 			function move_every()
 			{
-				for (a = 0; a < 15; a++)
-				{
+				//canvas.clearRect(0,0,width,height);
+				for (a = 0; a < nb_of_px; a++)
 					move(a);
-				}
 			}
 			function move(id)
 			{
